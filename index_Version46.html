@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+FACULTAD DE MEDICINA UAS
 <html lang="es">
 <head>
   <meta charset="UTF-8">

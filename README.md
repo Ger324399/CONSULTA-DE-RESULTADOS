@@ -2,7 +2,6 @@ FACULTAD DE MEDICINA UAS
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Consulta de Resultados</title>
   <style>
     body { font-family: 'Segoe UI', Arial, sans-serif; padding: 30px; background: #f7fafc; }
@@ -117,13 +116,15 @@ FACULTAD DE MEDICINA UAS
   <div class="container">
     <h2>Consulta tus resultados</h2>
     <input type="text" id="nombre" placeholder="Escribe tu nombre o parte del nombre" onkeydown="if(event.key==='Enter'){buscar();}">
+    <input type="password" id="no" placeholder="Escribe tu No (contraseña)" onkeydown="if(event.key==='Enter'){buscar();}">
     <button class="boton-azul" onclick="buscar()">Buscar</button>
     <div class="resultados" id="resultados"></div>
     <button class="boton-azul boton-imprimir" onclick="imprimir()">Imprimir</button>
   </div>
   <script>
-    // Pega aquí tu arreglo completo de datos
+    // ... Arreglo datos igual ...
     const datos = [
+      // ... Tus datos completos aquí ...
       {
         "No": 1,
         "NOMBRE": "Brissa Campos Gonzalez",
@@ -2252,7 +2253,7 @@ FACULTAD DE MEDICINA UAS
     "PIERNA IZQ.__1": "7.5%",
     "TRONCO__1": "24.6%"
       }
-      // ...Agrega aquí todos tus registros...
+      // ... y el resto de tus datos ...
     ];
 
     function normalizar(texto) {
@@ -2266,55 +2267,57 @@ FACULTAD DE MEDICINA UAS
 
     function buscar() {
       const nombreInput = normalizar(document.getElementById('nombre').value);
+      const noInput = document.getElementById('no').value.trim();
       const resultadosDiv = document.getElementById('resultados');
       resultadosDiv.innerHTML = '';
 
-      if (!nombreInput) {
-        resultadosDiv.innerHTML = '<p>Por favor escribe tu nombre o parte del nombre.</p>';
+      if (!nombreInput || !noInput) {
+        resultadosDiv.innerHTML = '<p>Por favor escribe tu nombre y tu No.</p>';
         return;
       }
 
-      const resultados = datos.filter(d => normalizar(d.NOMBRE).includes(nombreInput));
+      // Busca con nombre y No
+      const resultado = datos.find(d => 
+        normalizar(d.NOMBRE).includes(nombreInput) && String(d.No) === noInput
+      );
 
-      if (resultados.length > 0) {
-        resultados.forEach(resultado => {
-          let html = `<table>
-            <thead>
-              <tr><th colspan="2" class="tituloTabla">${resultado.NOMBRE}</th></tr>
-            </thead>
-            <tbody>
-              <tr><th>Sexo</th><td>${resultado.SEXO ?? ''}</td></tr>
-              <tr><th>Cintura</th><td>${resultado["CINTURA"] ?? ''}</td></tr>
-              <tr><th>Cadera</th><td>${resultado["CADERA"] ?? ''}</td></tr>
-              <tr><th>Muñeca</th><td>${resultado["MUÑECA"] ?? ''}</td></tr>
-              <tr><th>Tobillo</th><td>${resultado["TOBILLO"] ?? ''}</td></tr>
-              <tr><th>TAS</th><td>${resultado["TAS"] ?? ''}</td></tr>
-              <tr><th>TAD</th><td>${resultado["TAD"] ?? ''}</td></tr>
-              <tr><th>Talla</th><td>${resultado["TALLA"] ?? ''}</td></tr>
-              <tr><th>Peso</th><td>${resultado["PESO"] ?? ''}</td></tr>
-              <tr><th>DCI / BMR (Calorias)</th><td>${resultado["DCI / BMR"] ?? ''}</td></tr>
-              <tr><th>Edad Metabólica</th><td>${resultado["EDAD METABOLICA"] ?? ''}</td></tr>
-              <tr><th>% Agua Corporal</th><td>${resultado["% AGUA CORPORAL"] ?? ''}</td></tr>
-              <tr class="subtitulo"><th colspan="2"><b>% Grasa Corporal</b></th></tr>
-              <tr><th>Total</th><td>${resultado["% GRASA CORPORAL (TOTAL)"] ?? ''}</td></tr>
-              <tr><th>Brazo Izquierdo</th><td>${resultado["BRAZO IZQ."] ?? ''}</td></tr>
-              <tr><th>Brazo Derecho</th><td>${resultado["BRAZO DER."] ?? ''}</td></tr>
-              <tr><th>Pierna Derecha</th><td>${resultado["PIERNA DER."] ?? ''}</td></tr>
-              <tr><th>Pierna Izquierda</th><td>${resultado["PIERNA IZQ."] ?? ''}</td></tr>
-              <tr><th>Tronco</th><td>${resultado["TRONCO"] ?? ''}</td></tr>
-              <tr class="subtitulo"><th colspan="2"><b>% Masa Muscular</b></th></tr>
-              <tr><th>Total</th><td>${resultado["% MASA MUSCULAR (TOTAL)"] ?? ''}</td></tr>
-              <tr><th>Brazo Izquierdo</th><td>${resultado["BRAZO IZQ.__1"] ?? ''}</td></tr>
-              <tr><th>Brazo Derecho</th><td>${resultado["BRAZO DER.__1"] ?? ''}</td></tr>
-              <tr><th>Pierna Derecha</th><td>${resultado["PIERNA DER.__1"] ?? ''}</td></tr>
-              <tr><th>Pierna Izquierda</th><td>${resultado["PIERNA IZQ.__1"] ?? ''}</td></tr>
-              <tr><th>Tronco</th><td>${resultado["TRONCO__1"] ?? ''}</td></tr>
-            </tbody>
-          </table>`;
-          resultadosDiv.innerHTML += html;
-        });
+      if (resultado) {
+        let html = `<table>
+          <thead>
+            <tr><th colspan="2" class="tituloTabla">${resultado.NOMBRE}</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Sexo</th><td>${resultado.SEXO ?? ''}</td></tr>
+            <tr><th>Cintura</th><td>${resultado["CINTURA"] ?? ''}</td></tr>
+            <tr><th>Cadera</th><td>${resultado["CADERA"] ?? ''}</td></tr>
+            <tr><th>Muñeca</th><td>${resultado["MUÑECA"] ?? ''}</td></tr>
+            <tr><th>Tobillo</th><td>${resultado["TOBILLO"] ?? ''}</td></tr>
+            <tr><th>TAS</th><td>${resultado["TAS"] ?? ''}</td></tr>
+            <tr><th>TAD</th><td>${resultado["TAD"] ?? ''}</td></tr>
+            <tr><th>Talla</th><td>${resultado["TALLA"] ?? ''}</td></tr>
+            <tr><th>Peso</th><td>${resultado["PESO"] ?? ''}</td></tr>
+            <tr><th>DCI / BMR</th><td>${resultado["DCI / BMR"] ?? ''}</td></tr>
+            <tr><th>Edad Metabólica</th><td>${resultado["EDAD METABOLICA"] ?? ''}</td></tr>
+            <tr><th>% Agua Corporal</th><td>${resultado["% AGUA CORPORAL"] ?? ''}</td></tr>
+            <tr class="subtitulo"><th colspan="2"><b>% Grasa Corporal</b></th></tr>
+            <tr><th>Total</th><td>${resultado["% GRASA CORPORAL (TOTAL)"] ?? ''}</td></tr>
+            <tr><th>Brazo Izquierdo</th><td>${resultado["BRAZO IZQ."] ?? ''}</td></tr>
+            <tr><th>Brazo Derecho</th><td>${resultado["BRAZO DER."] ?? ''}</td></tr>
+            <tr><th>Pierna Derecha</th><td>${resultado["PIERNA DER."] ?? ''}</td></tr>
+            <tr><th>Pierna Izquierda</th><td>${resultado["PIERNA IZQ."] ?? ''}</td></tr>
+            <tr><th>Tronco</th><td>${resultado["TRONCO"] ?? ''}</td></tr>
+            <tr class="subtitulo"><th colspan="2"><b>% Masa Muscular</b></th></tr>
+            <tr><th>Total</th><td>${resultado["% MASA MUSCULAR (TOTAL)"] ?? ''}</td></tr>
+            <tr><th>Brazo Izquierdo</th><td>${resultado["BRAZO IZQ.__1"] ?? ''}</td></tr>
+            <tr><th>Brazo Derecho</th><td>${resultado["BRAZO DER.__1"] ?? ''}</td></tr>
+            <tr><th>Pierna Derecha</th><td>${resultado["PIERNA DER.__1"] ?? ''}</td></tr>
+            <tr><th>Pierna Izquierda</th><td>${resultado["PIERNA IZQ.__1"] ?? ''}</td></tr>
+            <tr><th>Tronco</th><td>${resultado["TRONCO__1"] ?? ''}</td></tr>
+          </tbody>
+        </table>`;
+        resultadosDiv.innerHTML = html;
       } else {
-        resultadosDiv.innerHTML = '<p>No se encontraron resultados para ese nombre.</p>';
+        resultadosDiv.innerHTML = '<p>No se encontraron resultados para ese nombre y No.</p>';
       }
     }
 

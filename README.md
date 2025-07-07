@@ -2292,11 +2292,11 @@ FACULTAD DE MEDICINA UAS - Laboratorio de Enfermedades Metabólicas (Medidas Ant
             <tr><th>Cadera</th><td>${resultado["CADERA"] ?? ''}</td></tr>
             <tr><th>Muñeca</th><td>${resultado["MUÑECA"] ?? ''}</td></tr>
             <tr><th>Tobillo</th><td>${resultado["TOBILLO"] ?? ''}</td></tr>
-            <tr><th>TAS</th><td>${resultado["TAS"] ?? ''}</td></tr>
-            <tr><th>TAD</th><td>${resultado["TAD"] ?? ''}</td></tr>
+            <tr><th>TAS (Tensión Arterial Sistólica)</th><td>${resultado["TAS"] ?? ''}</td></tr>
+            <tr><th>TAD (Tensión Arterial Diastólica)</th><td>${resultado["TAD"] ?? ''}</td></tr>
             <tr><th>Talla</th><td>${resultado["TALLA"] ?? ''}</td></tr>
             <tr><th>Peso</th><td>${resultado["PESO"] ?? ''}</td></tr>
-            <tr><th>DCI / BMR</th><td>${resultado["DCI / BMR"] ?? ''}</td></tr>
+            <tr><th>DCI / BMR (Calorías)</th><td>${resultado["DCI / BMR"] ?? ''}</td></tr>
             <tr><th>Edad Metabólica</th><td>${resultado["EDAD METABOLICA"] ?? ''}</td></tr>
             <tr><th>% Agua Corporal</th><td>${resultado["% AGUA CORPORAL"] ?? ''}</td></tr>
             <tr class="subtitulo"><th colspan="2"><b>% Grasa Corporal</b></th></tr>

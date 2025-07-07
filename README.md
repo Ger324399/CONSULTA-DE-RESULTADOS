@@ -1,4 +1,4 @@
-FACULTAD DE MEDICINA UAS
+FACULTAD DE MEDICINA UAS - Laboratorio de Enfermedades Metabólicas (Medidas Antropométricas para Diagnóstico de Hipertensión Arterial y Obesidad)
 <html lang="es">
 <head>
   <meta charset="UTF-8">
